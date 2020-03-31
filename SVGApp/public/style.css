@@ -1,0 +1,73 @@
+html {
+    width: 60%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    background-color: #FFFFFF;
+}
+body {
+    height: 100%;
+    min-height: 100%;
+    line-height: 1.75;
+    background-color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+a:link:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    cursor: pointer;
+    cursor: hand;
+}
+input[type=submit], button {
+    cursor: pointer;
+    cursor: hand;
+}
+input[type=file], button {
+    color: darkviolet;
+}
+table {
+    border: 1px solid black;
+    table-layout: fixed;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+th {
+    color: white;
+    border: 1px solid white;
+    width: auto;
+}
+td {
+    border: 1px solid black;
+    table-layout: fixed;
+    text-align: center;
+    width: auto;
+}
+#images {
+    color: black;
+    width: 350px;
+}
+div {
+    clear:none;   
+}
+@media(max-width: 900px) {
+    html {
+        font-size: 14px !important;
+        width: 80% !important;
+    }
+}
+@media(max-width: 480px) {
+    html {
+        font-size: 12px !important;
+        width: 90% !important;
+    }
+}
+@media(max-width: 320px) {
+    html {
+        font-size: 12px !important;
+        width: 100% !important;
+    }
+}

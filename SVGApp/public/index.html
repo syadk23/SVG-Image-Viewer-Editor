@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SVG Image Viewer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A basic SVG image editor">
+    <meta name="keywords" content="image">
+    <meta name="author" content="Syad Khwajazada">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+    <a name="top"></a>
+    <h1 style = "font-family:Arial, Helvetica, sans-serif"><center>SVG Image Viewer</center></h1>
+    <br>
+    
+    <h4><center>File Log Panel</center></h4>
+    <div style = "overflow: scroll; height: 750px">
+        <table align = "center" bgcolor = "#9fa3a6" id = "file_log_panel">
+        </table>
+    </div>
+
+    <br>
+    <h6>To upload a file, select the "Choose File" button</h6>
+    <form action = "/upload" method = "post" enctype = "multipart/form-data" ref = "myFile" id = "fileForm">
+        <input type = "file" id = "myFile" name = "uploadFile" class = "form-control-file" value = "" accept = ".svg">
+        <input type = "submit" id = "submitFile" class = "btn btn-secondary">
+    </form>
+
+    <hr>
+    <br>
+    
+    <h4><center>SVG View Panel</center></h4>
+    <h6>Select an image from the drop down to view its details</h6>
+    <label for = "images"></label>
+    <select id = "images">
+    </select>
+    <br>
+
+    <div style = "overflow: scroll; height: 1000px">
+        <table align = "center" bgcolor = "#9fa3a6" id = "SVG_view_panel">
+        </table>
+    </div><div>
+        <br>
+        <center>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#rectModal">Add Rectangle</button>
+            <div id="rectModal" class="modal fade">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label class="control-label">x:</label>
+                                    <div>
+                                        <input type="text" id = "x" class="form-control-file" name="x" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">y:</label>
+                                    <div>
+                                        <input type="text" id = "y" class="form-control-file" name="y" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">w:</label>
+                                    <div>
+                                        <input type="text" id = "w" class="form-control-file" name="w" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">h:</label>
+                                    <div>
+                                        <input type="text" id = "h" class="form-control-file" name="h" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">units:</label>
+                                    <div>
+                                        <input type="text" id = "rectUnits" class="form-control-file" name="units" value="">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class = "modal-footer">
+                            <button type="submit" id = "addRectangle" class="btn btn-success">Add Rectangle</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#circModal">Add Circle</button>
+            <div id="circModal" class="modal fade">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label class="control-label">cx:</label>
+                                    <div>
+                                        <input type="text" id = "cx" class="form-control-file" name="cx" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">cy:</label>
+                                    <div>
+                                        <input type="text" id = "cy" class="form-control-file" name="cy" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">r:</label>
+                                    <div>
+                                        <input type="text" id = "r" class="form-control-file" name="r" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">units:</label>
+                                    <div>
+                                        <input type="text" id = "circUnits" class="form-control-file" name="units" value="">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class = "modal-footer">
+                            <button type="submit" id = "addCircle" class="btn btn-success">Add Circle</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#scaleModal">Scale Shapes</button>    
+                <div id="scaleModal" class="modal fade">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            </div>
+                            <div class="modal-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label class="control-label">Scale Rectangles by a Factor</label>
+                                        <div>
+                                        <input type = "range" name = "rectSlider" min = "0.1" max = "10" value = "1" step = "0.1" onchange = "updateSliderRect(this.value);">
+                                        <br>
+                                        <input type = "text" id = "rectSliderText" value = "">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Scale Circles by a Factor</label>
+                                        <div>
+                                        <input type = "range" name = "circSlider" min = "0.1" max = "10" value = "1" step = "0.1" onchange = "updateSliderCirc(this.value);">
+                                        <br>
+                                        <input type = "text" id = "circSliderText" value = "">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class = "modal-footer">
+                                <button type="submit" id = "scaleAccept" class="btn btn-success">Accept Changes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->   
+                
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#attrModal">Edit/Add Attributes</button>    
+                <div id="attrModal" class="modal fade">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            </div>
+                            <div class="modal-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label class="control-label">Component (Eg. rectangle1) will edit Rectangle 1</label>
+                                        <div>
+                                            <input type = "text" id = "componentSelected" value = "">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Attribute Name</label>
+                                        <div>
+                                            <input type = "text" id = "attrName" value = "">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Attribute Value</label>
+                                        <div>
+                                            <input type = "text" id = "attrValue" value = "">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class = "modal-footer">
+                                <button type="submit" id = "attrAccept" class="btn btn-success">Accept Changes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+            <br>
+            <br>
+            <button type = "button" class = "btn btn-secondary" id = "editTitle">Edit Title</button>
+            <button type = "button" class = "btn btn-secondary" id = "editDesc">Edit Description</button>
+            <button type = "button" class = "btn btn-secondary" id = "createSVG">Create SVG</button>
+            <br>
+        </center>
+        
+        <form id = "titleForm" onsubmit = "return false">
+        </form>
+
+        <form id = "descForm" onsubmit = "return false">
+        </form>
+
+        <form id = "createSVGForm" onsubmit = "return false">
+        </form>
+    </div>
+
+    <hr>
+    <center><a href = "#top">Back to Top</a></center>
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+</body>
+</html>
